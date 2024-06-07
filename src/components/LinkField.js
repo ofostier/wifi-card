@@ -35,26 +35,34 @@ export const LinkField = (props) => {
 
   useEffect(() => {
     let opts = {};
-  }, [props.settings]);
+
+   
+  }, [props.linkUrl]);
+
+  console.log(props.settings)
 
   return (
-    <Card className="card-print" elevation={3}>
+
+    <Card
+    className="card-print"
+    elevation={3}
+  >
       <Pane width={'100%'}>
         <TextareaField
-          id="ssid"
+          id="linkField"
           type="text"
           marginBottom={5}
           autoComplete="off"
           autoCorrect="off"
           autoCapitalize="none"
           spellCheck={false}
-          maxLength="32"
+          maxLength="255"
           label={t('linkField.label')}
           placeholder={t('linkField.placeholder')}
-          value={props.settings.ssid}
-          onChange={(e) => props.onSSIDChange(e.target.value)}
-          isInvalid={!!props.ssidError}
-          validationMessage={!!props.ssidError && props.ssidError}
+          value={props.settings}
+          //onChange={(e) => props.onSSIDChange(e.target.value)}
+          // isInvalid={!!props.ssidError}
+          // validationMessage={!!props.ssidError && props.ssidError}
         />
       </Pane>
     </Card>

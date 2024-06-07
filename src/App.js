@@ -39,6 +39,7 @@ function App() {
     passwordError: '',
     eapIdentityError: '',
   });
+  const [linkUrl, setLinkUrl] = useState();
 
   const htmlDirection = (languageID) => {
     languageID = languageID || i18n.language;
@@ -137,12 +138,25 @@ function App() {
     firstLoad.current = false;
   };
 
+  const buildLinkUrl = (url) => {
+    // [...settings].map((item) => (
+    //   console.log(item)
+    // ))
+    let vLink = '';
+    Object.entries(settings).forEach(([k, v]) => 
+      // console.log(k + " = " + v);
+      vLink += (vLink=== '' ? '' : '&') + k + "=" + v
+    );
+    console.log(vLink);
+    let port = `${window.location.port}` !== '80' ? `${window.location.port}` : ''
+    setLinkUrl(`${window.location.protocol}//${window.location.hostname}` + (port !== '' ? ':'+port : '') + "/?"+ vLink)
+  }
+
   useEffect(() => {
     // Ensure the page direction is set properly on first load
     if (htmlDirection() === 'rtl') {
       html.style.direction = 'rtl';
     }
-    console.log('change detected');
   });
 
   return (
@@ -190,16 +204,6 @@ function App() {
         onHiddenSSIDChange={onHiddenSSIDChange}
         onAdditionalCardsChange={onAdditionalCardsChange}
         onHideTipChange={onHideTipChange}
-      />
-
-      <LinkField
-        settings={settings}
-        ssidError={errors.ssidError}
-        passwordError={errors.passwordError}
-        eapIdentityError={errors.eapIdentityError}
-        onSSIDChange={onSSIDChange}
-        onEapIdentityChange={onEapIdentityChange}
-        onPasswordChange={onPasswordChange}
       />
 
       <Button
