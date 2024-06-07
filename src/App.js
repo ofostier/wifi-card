@@ -143,14 +143,21 @@ function App() {
     //   console.log(item)
     // ))
     let vLink = '';
-    Object.entries(settings).forEach(([k, v]) => 
-      // console.log(k + " = " + v);
-      vLink += (vLink=== '' ? '' : '&') + k + "=" + v
+    Object.entries(settings).forEach(
+      ([k, v]) =>
+        // console.log(k + " = " + v);
+        (vLink += (vLink === '' ? '' : '&') + k + '=' + v)
     );
     console.log(vLink);
-    let port = `${window.location.port}` !== '80' ? `${window.location.port}` : ''
-    setLinkUrl(`${window.location.protocol}//${window.location.hostname}` + (port !== '' ? ':'+port : '') + "/?"+ vLink)
-  }
+    let port =
+      `${window.location.port}` !== '80' ? `${window.location.port}` : '';
+    setLinkUrl(
+      `${window.location.protocol}//${window.location.hostname}` +
+        (port !== '' ? ':' + port : '') +
+        '/?' +
+        vLink
+    );
+  };
 
   useEffect(() => {
     // Ensure the page direction is set properly on first load
