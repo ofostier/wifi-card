@@ -35,18 +35,10 @@ export const LinkField = (props) => {
 
   useEffect(() => {
     let opts = {};
-
-   
   }, [props.settings]);
 
-
-
   return (
-
-    <Card
-    className="card-print"
-    elevation={3}
-  >
+    <Card className="card-print" elevation={3}>
       <Pane width={'100%'}>
         <TextareaField
           id="ssid"

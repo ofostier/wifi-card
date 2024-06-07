@@ -192,7 +192,7 @@ function App() {
         onHideTipChange={onHideTipChange}
       />
 
-      <LinkField 
+      <LinkField
         settings={settings}
         ssidError={errors.ssidError}
         passwordError={errors.passwordError}
