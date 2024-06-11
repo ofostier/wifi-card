@@ -215,9 +215,7 @@ function App() {
         onHideTipChange={onHideTipChange}
       />
 
-      < LinkField 
-        value={linkUrl}
-      />
+      <LinkField value={linkUrl} />
       <Button
         id="print"
         appearance="primary"
