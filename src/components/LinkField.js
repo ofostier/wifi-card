@@ -8,6 +8,7 @@ import {
   Text,
   TextareaField,
   TextInput,
+  IconButton, CogIcon, majorScale, TrashIcon, TickIcon,CutIcon, ShareIcon
 } from 'evergreen-ui';
 import QRCode from 'qrcode.react';
 import { useEffect, useState } from 'react';
@@ -40,9 +41,8 @@ export const LinkField = (props) => {
   console.log(props.settings);
 
   return (
-    <Card className="card-print" elevation={3}>
       <Pane width={'100%'}>
-        <TextareaField
+        <TextInput
           id="linkField"
           type="text"
           marginBottom={5}
@@ -53,12 +53,13 @@ export const LinkField = (props) => {
           maxLength="255"
           label={t('linkField.label')}
           placeholder={t('linkField.placeholder')}
-          value={props.settings}
+          value={props.value}
+          disabled
           //onChange={(e) => props.onSSIDChange(e.target.value)}
           // isInvalid={!!props.ssidError}
           // validationMessage={!!props.ssidError && props.ssidError}
         />
+        <IconButton icon={ShareIcon} marginRight={majorScale(2)} />
       </Pane>
-    </Card>
   );
 };

@@ -164,6 +164,8 @@ function App() {
     if (htmlDirection() === 'rtl') {
       html.style.direction = 'rtl';
     }
+
+    buildLinkUrl();
   });
 
   return (
@@ -213,6 +215,9 @@ function App() {
         onHideTipChange={onHideTipChange}
       />
 
+      < LinkField 
+        value={linkUrl}
+      />
       <Button
         id="print"
         appearance="primary"
