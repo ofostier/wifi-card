@@ -9,11 +9,10 @@ import { Translations } from './translations';
 import useHashParam from './components/useHashParam';
 
 function App() {
-
   const getHashSearchParams = (location) => {
     const hash = location.hash.slice(1);
     const [prefix, query] = hash.split('?');
-    
+
     return [prefix, new URLSearchParams(query)];
   };
   const getHashParam = (key, location = window.location) => {
@@ -22,13 +21,13 @@ function App() {
   };
   const setHashParam = (key, value, location = window.location) => {
     const [prefix, searchParams] = getHashSearchParams(location);
-  
+
     if (typeof value === 'undefined') {
       searchParams.delete(key);
     } else {
       searchParams.set(key, value);
     }
-  
+
     const search = searchParams.toString();
     location.hash = search ? `${prefix}?${search}` : prefix;
   };
@@ -36,38 +35,38 @@ function App() {
   let pssid = getHashParam('ssid'); //params.get('ssid') || '';
   let ppassword = getHashParam('password') || '';
   let pencryptionMode =
-  getHashParam('encryptionMode') !== null
+    getHashParam('encryptionMode') !== null
       ? getHashParam('encryptionMode')
       : 'WPA';
   let peapMethod = getHashParam('eapMethod') || 'PWD';
   let peapIdentity = getHashParam('eapIdentity') || '';
   let phidePassword =
-  getHashParam('hidePassword') === null
+    getHashParam('hidePassword') === null
       ? false
       : getHashParam('hidePassword').toLowerCase() === 'true'
       ? true
       : false;
   let phiddenSSID =
-  getHashParam('hiddenSSID') === null
+    getHashParam('hiddenSSID') === null
       ? false
       : getHashParam('hiddenSSID').toLowerCase() === 'true'
       ? true
       : false;
   let pportrait =
-  getHashParam('portrait') === null
+    getHashParam('portrait') === null
       ? false
       : getHashParam('portrait').toLowerCase() === 'true'
       ? true
       : false || false;
   let padditionalCards = getHashParam('additionalCards') || 0;
   let phideTip =
-  getHashParam('hideTip') === null
+    getHashParam('hideTip') === null
       ? false
       : getHashParam('hideTip').toLowerCase() === 'true'
       ? true
       : false;
   let planguage =
-  getHashParam('lng') === null || getHashParam('lng').toLowerCase() === ''
+    getHashParam('lng') === null || getHashParam('lng').toLowerCase() === ''
       ? 'en-US'
       : getHashParam('lng');
 
@@ -117,7 +116,7 @@ function App() {
     html.style.direction = htmlDirection(language);
     i18n.changeLanguage(language);
 
-    setSettings({ ...settings, lng:language });
+    setSettings({ ...settings, lng: language });
   };
 
   const onPrint = () => {
@@ -207,38 +206,33 @@ function App() {
   };
 
   const generateUrl = () => {
-
-    Object.entries(settings).map( ([key, value]) => {
+    Object.entries(settings).map(([key, value]) => {
       //console.log(key+" = " + value)
-      setHashParam(key, value)
-      if (key === 'ssid')
-        setName(value)
-      return true
-    }
-    )
-  }
-  const [name, setName] = useHashParam("name");
+      setHashParam(key, value);
+      if (key === 'ssid') setName(value);
+      return true;
+    });
+  };
+  const [name, setName] = useHashParam('name');
 
   useEffect(() => {
     // Ensure the page direction is set properly on first load
     if (htmlDirection() === 'rtl') {
       html.style.direction = 'rtl';
     }
-    generateUrl()
+    generateUrl();
   });
 
-  
   return (
     <Pane>
-      Hello{" "}
-        {name ? name + "! You name is stored in hash params #️⃣" : "visitor!"}
+      Hello{' '}
+      {name ? name + '! You name is stored in hash params #️⃣' : 'visitor!'}
       <Pane display="flex">
         <img alt="icon" src={logo} width="32" height="32" />
         <Heading size={900} paddingRight={16} paddingLeft={16}>
           {t('title')}
         </Heading>
       </Pane>
-
       <Pane>
         <Paragraph marginTop={12}>{t('desc.use')}</Paragraph>
 
@@ -250,7 +244,6 @@ function App() {
           .
         </Paragraph>
       </Pane>
-
       <Pane>
         <WifiCard
           settings={settings}
@@ -262,7 +255,6 @@ function App() {
           onPasswordChange={onPasswordChange}
         />
       </Pane>
-
       <Settings
         settings={settings}
         firstLoad={firstLoad}
@@ -276,7 +268,6 @@ function App() {
         onAdditionalCardsChange={onAdditionalCardsChange}
         onHideTipChange={onHideTipChange}
       />
-
       <Button
         id="print"
         appearance="primary"

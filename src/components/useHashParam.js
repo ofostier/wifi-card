@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 const getHashSearchParams = (location) => {
   const hash = location.hash.slice(1);
   const [prefix, query] = hash.split('?');
-  
+
   return [prefix, new URLSearchParams(query)];
 };
 
@@ -34,11 +34,14 @@ const useHashParam = (key) => {
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, [key]);
-  
-  const setValue = useCallback((value) => {
-    setHashParam(key, value);
-  }, [key]);
-  
+
+  const setValue = useCallback(
+    (value) => {
+      setHashParam(key, value);
+    },
+    [key]
+  );
+
   return [innerValue, setValue];
 };
 
