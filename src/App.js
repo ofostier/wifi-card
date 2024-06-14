@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import logo from '../src/images/wifi.png';
 import { Settings } from './components/Settings';
 import { WifiCard } from './components/WifiCard';
-import { LinkField } from './components/LinkField';
 import './style.css';
 import { Translations } from './translations';
 
@@ -142,7 +141,6 @@ function App() {
     if (htmlDirection() === 'rtl') {
       html.style.direction = 'rtl';
     }
-    console.log('change detected');
   });
 
   return (
@@ -190,16 +188,6 @@ function App() {
         onHiddenSSIDChange={onHiddenSSIDChange}
         onAdditionalCardsChange={onAdditionalCardsChange}
         onHideTipChange={onHideTipChange}
-      />
-
-      <LinkField 
-        settings={settings}
-        ssidError={errors.ssidError}
-        passwordError={errors.passwordError}
-        eapIdentityError={errors.eapIdentityError}
-        onSSIDChange={onSSIDChange}
-        onEapIdentityChange={onEapIdentityChange}
-        onPasswordChange={onPasswordChange}
       />
 
       <Button
